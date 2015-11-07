@@ -1,10 +1,3 @@
-(define (fun n) (f_impl 0 1 2 n))
-
-(define (f_impl f0 f1 f2 n) 
-    (cond ((< n 3) f2)
-    (else (f_impl f1 f2 (+ (+ f2 (* 2 f1)) (* 3 f0)) (- n 1)))
-    )
-  )
   
 (define (triangle n k)
     (cond ((and (= n 0) (= k 0)) 1)
