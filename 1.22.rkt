@@ -1,0 +1,21 @@
+(define (search-for-primes n)
+    (let ((start-time (current-milliseconds)))
+      (consective-primes n 3)
+      (- (current-milliseconds) start-time)
+        )
+    )
+  
+  (define (consective-primes start count)
+    (cond ((= 0 count) (display "are primes"))
+          ((prime? start) 
+           (display start) 
+           (newline)
+           (consective-primes (next-odd start) (- count 1))
+           )
+          (else (consective-primes (next-odd start) count)))
+    )
+
+
+(define (next-odd n)
+    (if (even? n) (+ 1 n ) (+ 2 n))
+    )
