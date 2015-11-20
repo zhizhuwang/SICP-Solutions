@@ -1,0 +1,13 @@
+(define (find-divisor n divisor)
+    (cond ((> (square divisor) n) n)
+          ((divided? n divisor) divisor)
+          (else (find-divisor n (+ 1 divisor)))
+     )
+    )
+(define (square a) (* a a))
+(define (divided? n divisor)
+    (= (remainder n divisor) 0))
+
+(define (smallest-divisor n)
+    (find-divisor n 2)
+    )
