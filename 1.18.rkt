@@ -1,0 +1,6 @@
+(define (mul_iter a b product)
+    (cond ((= b 0) product)
+          ((even? b) (mul_iter (double a) (halve b) product))
+          ((odd? b) (mul_iter a (- b 1) (+ a product)))
+    )
+    )
