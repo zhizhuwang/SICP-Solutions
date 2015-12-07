@@ -33,7 +33,7 @@
 > (total-weight mobile)
 45
 
-
+;; part d
 (define (balanced? m)
     (cond ((integer? m) #t) 
       ((= (* (branch-length (left-branch m)) (branch-weight (left-branch m))) 
@@ -41,3 +41,17 @@
         (and (balanced? (branch-structure (left-branch m))) 
              (balanced? (branch-structure (right-branch m))))) 
       (else #f)))
+
+
+;; part d
+
+(define (make-mobile left right)
+(cons left right))
+(define (make-branch length structure)
+(cons length structure))
+
+;; we need to change the following two functions
+(define (branch-structure b) 
+    (cdr b))
+(define (right-branch m)
+	(cdr m))
