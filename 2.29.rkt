@@ -32,3 +32,12 @@
 '(10 25)
 > (total-weight mobile)
 45
+
+
+(define (balanced? m)
+    (cond ((integer? m) #t) 
+      ((= (* (branch-length (left-branch m)) (branch-weight (left-branch m))) 
+          (* (branch-length (right-branch m)) (branch-weight (right-branch m))))
+        (and (balanced? (branch-structure (left-branch m))) 
+             (balanced? (branch-structure (right-branch m))))) 
+      (else #f)))
