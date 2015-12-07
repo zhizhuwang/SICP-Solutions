@@ -20,9 +20,10 @@
        (branch-weight (right-branch m))))
 
 (define (branch-weight b)
-    (if (integer? (branch-structure b))
-        (branch-structure b)
-        (branch-weight (branch-structure b)))
+    (let ((s (branch-structure b)))
+    (if (integer? s)
+        s
+        (branch-weight s))))  
 
  (define mobile (make-mobile (make-branch 10 25)
                              (make-branch 5 20)))
