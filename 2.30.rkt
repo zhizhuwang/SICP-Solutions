@@ -7,14 +7,17 @@
 
 (define (square x) (* x x))
 
-
-
-
-(define (square-tree tree)
-  (map (lambda (element)  
-         (if (pair? element)
-             (square-tree element)
-             (square element))) 
+(define (square-tree-with-map tree)
+  (map (lambda (sub-tree)  
+         (if (pair? sub-tree)  (square-tree-with-map sub-tree)
+             (square sub-tree))) 
        tree
   ))
+
+(define (square-tree tree)
+  (cond ((null? tree) '())
+        ((not (pair? tree)) (square tree))
+        (else (cons (square-tree (car tree)) (square-tree (cdr tree))))
+  )
+)
 
