@@ -15,10 +15,9 @@
 
 (define (map f s)
   (if (null? s) (list )
-      (cons (f (car s)) (f (cdr s)))))
+      (cons (f (car s)) (map f (cdr s)))))
 
-
-(define tree (list 1
+> (define tree (list 1
          (list 2 (list 3 4) 5) (list 6 7)))
-
-(count-leave tree)
+> (count-leaves tree)
+7
