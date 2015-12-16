@@ -47,3 +47,14 @@
 ;; '((1 2 3 4) (4 5 6 6) (6 7 8 9))
 ;; > (transpose m)
 ;; '((1 4 6) (2 5 7) (3 6 8) (4 6 9))
+
+
+(define (matrix-*-matrix m n)
+    (let ((cols (transpose n)))
+      (map-single (lambda (sub-vec) (matrix-*-vector cols sub-vec))  m)))
+
+
+;; > (define x (list (list 1 2) (list 3 4)))
+;; > (define y (list (list 5 6) (list 7 8)))
+;; > (matrix-*-matrix x y)
+;; '((19 22) (43 50))
