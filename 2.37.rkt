@@ -18,3 +18,17 @@
 
 ;; > (dot-product (list 1 2 3) (list 4 5 6))
 ;; 32
+
+(define (map-single f s)
+         (if (null? s)
+             '()
+             (cons (f (car s)) 
+                   (map-single f (cdr s)))))
+
+(define (matrix-*-vector m v)
+    (map-single (lambda (sub-vec) (dot-product sub-vec v)) m))
+
+(define m (list (list 1 2 3 4) (list 4 5 6 6) (list 6 7 8 9)))
+
+;; > (matrix-*-vector m (list 1 1 1 1))
+;; '(10 21 30)
