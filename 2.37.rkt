@@ -32,3 +32,18 @@
 
 ;; > (matrix-*-vector m (list 1 1 1 1))
 ;; '(10 21 30)
+
+
+(define (accumulate-n f initial seqs)
+    (if (null? (car seqs))
+        '()
+        (cons (accumulate f initial (map-single car seqs))
+              (accumulate-n f initial (map-single cdr seqs)))))
+
+(define (transpose mat)
+    (accumulate-n cons '() mat))
+
+;; m
+;; '((1 2 3 4) (4 5 6 6) (6 7 8 9))
+;; > (transpose m)
+;; '((1 4 6) (2 5 7) (3 6 8) (4 6 9))
