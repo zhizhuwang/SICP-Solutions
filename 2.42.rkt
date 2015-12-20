@@ -31,21 +31,19 @@
   
 (define empty-board (list ))
 
-(define (safe-row? row col i poss)
-  (cond ((= i col) #t)
-        ((or (= row (car poss))
-             (= row (+ (car poss) i))
-             (= row (- (car poss) i))
+(define (safe-row? new-row step rest)
+  (cond ((null? rest) #t)
+        ((or (= new-row (car rest))
+             (= new-row (+ (car rest) step))
+             (= new-row (- (car rest) step))
              ) #f)
-         (else (safe-row? row col (+ i 1) (cdr poss)))
+         (else (safe-row? new-row (+ step 1) (cdr rest)))
          ))
 
 (define (safe? col positions)
-  (let ((new-row (car positions))
-        (i 1))
-         (safe-row? new-row col i (cdr positions))
-         ))
-
+  (let ((step 1))
+    (safe-row? (car positions) 1 (cdr positions))))
+    
 > (safe-row? 2 3 1 (list 7 3))
 #t
 > (safe? 3 (list 2 7 3))
