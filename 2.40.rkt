@@ -23,3 +23,43 @@
       '()
       (append (fun (car sequence)) 
               (flatmap fun (cdr sequence)))))
+
+(define (square x) (* x x))
+(define (find-divisor n test-divisor)
+    (cond ((> (square test-divisor) n) n)
+          ((divided? n test-divisor) test-divisor)
+          (else (find-divisor n (next test-divisor)))
+          )
+    )
+(define (next test-divisor)
+    (if (= 2 test-divisor) 3
+        (+ 2 test-divisor)
+        )
+    )
+(define (divided? n divisor) 
+     (= 0 (remainder n divisor)))
+
+(define (prime? n)
+     (= n (smallest-divisor n))
+     )
+(define (smallest-divisor n)
+    (find-divisor n 2)
+  )
+
+(define (prime-sum? pair)
+  (prime? (+ (car pair) (cadr pair))))
+
+(define (make-pair-sum pair)
+  (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
+
+(define (prime-sum-pairs n)
+  (map make-pair-sum 
+       (filter prime-sum? 
+               (flatmap
+                (lambda (i) 
+                  (map 
+                   (lambda (j) (list j i)) 
+                   (enumerate 1 (- i 1)))) 
+                (enumerate 2 n)))))
+
+
