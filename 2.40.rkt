@@ -24,6 +24,10 @@
       (append (fun (car sequence)) 
               (flatmap fun (cdr sequence)))))
 
+
+;; > (unique-pair 4)
+;; '((1 2) (1 3) (2 3) (1 4) (2 4) (3 4))
+
 (define (square x) (* x x))
 (define (find-divisor n test-divisor)
     (cond ((> (square test-divisor) n) n)
@@ -52,6 +56,8 @@
 (define (make-pair-sum pair)
   (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
 
+
+
 (define (prime-sum-pairs n)
   (map make-pair-sum 
        (filter prime-sum? 
@@ -62,4 +68,14 @@
                    (enumerate 1 (- i 1)))) 
                 (enumerate 2 n)))))
 
+
+;; >(prime-sum-pairs 4)
+;; '((1 2 3) (2 3 5) (1 4 5) (3 4 7)) 
+
+
+;;use unique-pair simplify
+(define (prime-sum-pairs2 n)
+  (map make-pair-sum 
+       (filter prime-sum? 
+               (unique-pair n))))
 
