@@ -39,3 +39,24 @@
 
 ;; > (unique-triples 10 25)
 ;; '((7 8 10) (6 9 10))
+
+
+(define (fold-right fun initial sequence)
+  (if (null? sequence)
+      initial
+      (fun (car sequence) (fold-right fun initial (cdr sequence)))))
+
+(define (sum-of-triple-equals-to? triple s)
+  (= (fold-right + 0 triple) s))
+
+(define (unique-triples2 n s)
+  (filter 
+   (lambda (t) (sum-of-triple-equals-to? t s))
+   (flatmap
+    (lambda (pair) 
+      (map (lambda (k) (cons k pair)) (enumerate 1 (- (car pair) 1))))
+    
+    
+;; > (unique-triples2 10 25)
+;; '((7 8 10) (6 9 10))
+    (unique-pairs n))))
