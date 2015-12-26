@@ -59,4 +59,3 @@
     
 ;; > (unique-triples2 10 25)
 ;; '((7 8 10) (6 9 10))
-    (unique-pairs n))))
