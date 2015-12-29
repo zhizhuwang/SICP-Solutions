@@ -11,3 +11,12 @@
           (lambda (frame)
             (painter-left frame)
             (painter-left frame)))))
+
+
+(define (rotate-180 painter)
+  (let ((new-painter (transform-painter painter
+                      (make-vect 1 1)
+                      (make-vect 0 1)
+                      (make-vect 1 0))))
+        (lambda (frame)
+          (new-painter frame))))
