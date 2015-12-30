@@ -15,3 +15,14 @@
             (top-painter frame)
             (bottom-painter frame)))))
 
+
+(define (below painter1 painter2)
+  (lambda (frame)
+    ((flip-horiz
+      (rotate-90
+       (beside
+        (rotate-270
+         (flip-horiz painter1))
+        (rotate-270
+         (flip-horiz painter2)))))
+     frame)))
