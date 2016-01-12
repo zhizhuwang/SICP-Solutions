@@ -86,28 +86,35 @@
 
 (define (contains? x set)
   (cond ((null? set) #f)
-        ((= x (car set)) #t)
+        ((eq? x (car set)) #t)
         (else (contains? x (cdr set)))))
 
 (define (encode-symbol symbol tree)
   (let ((left (left-branch tree))
         (right (right-branch tree)))
-    (cond ((leaf? left) (if (eq? (symbol-leaf left) symbol) '(0) 
-                            (encode-symbol symbol right)))
-          ((contains? symbol (symbols left)) (cons 0 (encode-symbol symbol left)))
-          ((leaf? right) (if (eq? (symbol-leaf right) symbol) '(1) 
-                            (error "xxxxx")))
-          ((contains? symbol (symbols right)) (cons 1 (encode-symbol symbol right))))))
+    (cond ((and (leaf? left) (eq? (symbol-leaf left) symbol)) '(0))
+          ((and (leaf? right) (eq? (symbol-leaf right) symbol)) '(1))
+          ((and (not (leaf? left)) (contains? symbol (symbols left))) (cons 0 (encode-symbol symbol left)))
+          ((and (not (leaf? right)) (contains? symbol (symbols right))) (cons 1 (encode-symbol symbol right)))
+          (else (error "error message")))))
 
 
 
 ;; > (encode '(A) sample-tree)
 ;; '(0)
 
+;; > (encode '(B) sample-tree)
+;; '(1 0)
+;; > (encode '(C) sample-tree)
+;; '(1 1 1)
+;; > (encode '(D) sample-tree)
+;; '(1 1 0)
 
+;; > (encode '(E) sample-tree)
+;; error message
 
-
-
+;; > (encode '(A D A B B C A) sample-tree)
+;; '(0 1 1 0 0 1 0 1 0 1 1 1 0)
 
 
 
