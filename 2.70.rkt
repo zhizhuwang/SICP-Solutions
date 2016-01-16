@@ -90,14 +90,18 @@
         (else (contains? x (cdr set)))))
 
 (define (encode-symbol symbol tree)
-  (let ((left (left-branch tree))
-        (right (right-branch tree)))
-    (cond ((and (leaf? left) (eq? (symbol-leaf left) symbol)) '(0))
-          ((and (leaf? right) (eq? (symbol-leaf right) symbol)) '(1))
-          ((and (not (leaf? left)) (contains? symbol (symbols left))) (cons 0 (encode-symbol symbol left)))
-          ((and (not (leaf? right)) (contains? symbol (symbols right))) (cons 1 (encode-symbol symbol right)))
-          (else (error "error message")))))
+    (cond ((leaf? tree) '())
+          ((symbol-in-set? symbol (symbols (left-branch tree))) 
+           (cons 0 (encode-symbol symbol (left-branch tree))))
+          ((symbol-in-set? symbol (symbols (right-branch tree))) 
+           (cons 1 (encode-symbol symbol (right-branch tree))))
+          (else (error "error message"))))
 
+(define (symbol-in-set? symbol set)
+  (not
+   (false? (findf 
+            (lambda (s) (eq? symbol s)) 
+            set))))
 
 
 ;; > (encode '(A) sample-tree)
@@ -148,7 +152,7 @@
 
 
 
-> (define (eight-symbols-tree)
+> (define eight-symbols-tree
     (generate-huffman-tree
      '((A 2) (BOOM 1) (GET 2) (JOB 2) (NA 16) (SHA 3) (YIP 9) (WAH 1))))
 
@@ -173,7 +177,7 @@
 
 
 > (encode '(GET A JOB) eight-symbols-tree )
-'(1 1 1 1 1 1 1 0 0 1 1 1 1 0)
+;;'(1 1 1 1 1 1 1 0 0 1 1 1 1 0)
 
 
 
