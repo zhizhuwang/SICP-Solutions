@@ -34,4 +34,4 @@ n = 10:
 				   2  1
 
 
-For the most frequent symbols, it require 1 bit, and n -1 bits for most least frequent symbols.
+For the most frequent symbols, it require 1 bit, and n -1 bits for least frequent symbols.
