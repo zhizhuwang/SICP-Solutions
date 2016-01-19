@@ -180,3 +180,18 @@
 > (encode '(JOB) eight-symbols-tree )
 ;; '(1 1 1 1 1)
 
+
+(length (encode '(GET A JOB)  eight-symbols-tree))
+;;14
+(length (encode '(SHA NA NA NA NA NA NA NA NA)  eight-symbols-tree))
+;;12
+(length (encode '(WAH YIP YIP YIP YIP YIP YIP YIP YIP YIP )  eight-symbols-tree))
+;;23
+(length (encode '(SHA BOOM)  eight-symbols-tree))
+;;9
+
+;;the bits needed by Huffman Encoding is  14*2 + 12 *2 + 23 + 9 = 84
+
+;;the bits needed by fix-lenght encoding is ( 3*2 + 9*2 + 10 + 2 ) * 3 = 108
+
+;;the Huffman Encoding has saved 24 bits
