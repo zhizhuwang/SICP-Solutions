@@ -1,6 +1,0 @@
-(define (fast_expt_iter b n a)
-    (cond ((= n 1) (* b a))
-          ((even? n) (fast_expt_iter (square b) (/ n 2) a))
-          ((odd? n) (fast_expt_iter (square b) (/ (- n 1) 2) (* a b)))
-    )
-  )
