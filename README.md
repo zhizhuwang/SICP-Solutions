@@ -8,3 +8,4 @@ Solutions of exercises in SICP
 *  
     
     
+*	*"principle of least commitment"* --2.4.2
