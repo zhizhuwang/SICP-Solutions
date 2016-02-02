@@ -37,10 +37,59 @@ b.
 )
 
 (define (make-sum x y)
-	((get 'make-sum 'x) x y))
+	((get 'make-sum '+) x y))
 
 (define (addend sum)
 	((get 'addend '+) (contents sum)))
 
 (define (augend sum)
 	((get 'augend '+) (contents sum)))
+
+
+
+
+(define (install-product-package)
+	;;; internal procedures
+	(define (multiplier p) (car p))
+
+	(define (multiplicand p) (cadr s))
+
+	(define (make-product x y)
+		(cond ((or (= x 0) (= y 0)) 0)
+			  ((= x 1) y)
+			  ((= y 1) x)
+			  ((and (number? x) (number? y))
+			    (* x y))
+			  (else
+			  	(attach-tag '* x y))))
+
+	;;; interface to the rest of system
+	(put 'multiplier '* multiplier)
+	(put 'multiplicand '+ multiplicand)
+	(put 'make-product '+ make-product)
+
+	(put 'deriv '*
+		(lambda (exp var)
+			(make-sum 
+				(make-product (multiplier exp)
+							  (deriv (multiplicand exp) var))
+				(make-product (deriv (multiplier exp) var)
+				               (multiplicand exp)))))
+
+'done
+)
+
+(define (make-product x y)
+	((get 'make-product '*) x y))
+
+(define (multiplier product)
+	((get 'multiplier '*) (contents product)))
+
+(define (multiplicand product)
+	((get 'multiplicand '*) (contents product)))
+	
+	
+	
+	
+	
+	
