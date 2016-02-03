@@ -103,7 +103,7 @@ b.
 (define (contents datumn)
 	(cdr datumn))	
 	
-	
+c.	
 (define (install-exponent-package)
 	;;; internal procedures
 
@@ -139,3 +139,9 @@ b.
 	((get 'exponent '**) p))
 (define (make-exponentiation x y)
 	((get 'make-exponentiation '**) x y))	
+
+
+
+d. If we use the dispatch line like this, ((get (operator exp) 'deriv) (operands exp) var)
+   we must change the corresponding put function, ((put '+ 'deriv) (lambda (exp var) (...)))
+
