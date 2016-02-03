@@ -104,4 +104,38 @@ b.
 	(cdr datumn))	
 	
 	
-	
+(define (install-exponent-package)
+	;;; internal procedures
+
+	(define (base p) (car p))
+
+	(define (exponent p) (cadr s))
+
+	(define (make-exponentiation base exponent)
+		(cond ((= exponent 1) base)
+        ((= exponent 0) 1)
+        (else (list '** base exponent))))
+
+	;;; interface to the rest of system
+	(put 'base '** base)
+	(put 'exponent '** exponent)
+	(put 'make-exponentiation '** make-exponentiation)
+
+	(put 'deriv '**
+		(lambda (exp var)
+			(make-product 
+			    (make-product 
+                        (exponent exp)
+                        (make-exponentiation (base exp) (- (exponent exp) 1)))
+                       (deriv (base exp) var))))
+
+
+'done
+)
+
+(define (base p)
+	((get 'base '**) p))
+(define (exponent p)
+	((get 'exponent '**) p))
+(define (make-exponentiation x y)
+	((get 'make-exponentiation '**) x y))	
