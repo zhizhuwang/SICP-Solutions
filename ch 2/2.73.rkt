@@ -7,7 +7,12 @@
 (define (operands exp) (cdr exp))
 
 a. The new procedure transforms the deriv into data-directed style.
-	We can't assimilate the predictes number? and same-variable? into the data-directed dispatch, because the numbers and variables can not be listed in the table.
+   ;;We can't assimilate the predictes number? and same-variable? into the data-directed dispatch, because the numbers and variables can not be listed in the table.
+There's no need to assimilate the predictes number? and same-variable? into the data-directed dispatch;	
+If we want to do this, we could represent numbers like ('integer 1234), and put the associated funtion into the entry table,
+(put 'is-number? 'integer number?); 
+when deriv receive an object, it uses ((get 'is-number? 'integer) 1234) to get the function of number?, and this is the original build-in funciton that the language provided.
+
 
 b.
 (define (install-sum-package)
@@ -32,8 +37,8 @@ b.
 	(put 'deriv '+
 		(lambda (exp var)
 			(make-sum (deriv (addend exp) var)
-
-'done			          (deriv (augend exp) var))))
+                                  (deriv (augend exp) var))))
+'done			          
 )
 
 (define (make-sum x y)
