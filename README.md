@@ -9,3 +9,7 @@ Solutions of exercises in SICP
     
     
 *	*"principle of least commitment"* --2.4.2
+*   Three **Data Abstration** strategies -- 2.4
+		*Explicit dispatch*
+		*Data-Directed*
+		*Message passing*
