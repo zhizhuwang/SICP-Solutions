@@ -9,6 +9,8 @@
 (define (reverse-left sequence)
   (foldl cons '() sequence))
 
+;; (reverse-left '(1 2 3 4))
+;; '(4 3 2 1)
 
 (define (foldr fun initial sequence)
   (if (null? sequence)
@@ -17,3 +19,6 @@
 
 (define (reverse-right sequence)
   (foldr (lambda (x y) (append y (list x))) '() sequence))
+
+;; (reverse-right '(1 2 3 4 5))
+;; '(5 4 3 2 1)
