@@ -22,3 +22,11 @@
 
 ;; (reverse-right '(1 2 3 4 5))
 ;; '(5 4 3 2 1)
+
+
+;; foldl and foldr in Hashell
+;; foldl (\acc x -> [x] ++ acc) []  [1,2,3,4,5]
+;; [5,4,3,2,1]
+
+;; foldr (\x acc -> acc ++ [x]) []  [1,2,3,4,5]
+;; [5,4,3,2,1]
